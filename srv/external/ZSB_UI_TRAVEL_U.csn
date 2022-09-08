@@ -1,0 +1,1114 @@
+{
+  "meta": {
+    "creator": "cds-dk 6.0.2"
+  },
+  "$version": "2.0",
+  "definitions": {
+    "ZSB_UI_TRAVEL_U": {
+      "kind": "service",
+      "@cds.external": true,
+      "@m.IsDefaultEntityContainer": "true",
+      "@sap.message.scope.supported": "true",
+      "@sap.supported.formats": "atom json xlsx"
+    },
+    "ZSB_UI_TRAVEL_U.BookingSupplement": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Booking Supplement Projection View",
+      "elements": {
+        "TravelID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 8,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Travel ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Travel ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "BookingID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Booking Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Booking ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "BookingSupplementID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Book. Supp. Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Booking Supplement ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "SupplementID": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "SupplementText",
+          "@sap.label": "Product ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement ID",
+          "@sap.value.list": "standard"
+        },
+        "SupplementText": {
+          "type": "cds.String",
+          "length": 1024,
+          "@sap.label": "Product Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement Description",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Product Price",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement Price"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.value.list": "standard",
+          "@sap.semantics": "currency-code"
+        },
+        "LASTCHANGEDAT": {
+          "type": "cds.Timestamp",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@odata.Precision": 7,
+          "@sap.label": "Time Stamp"
+        },
+        "to_Booking": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Booking",
+          "keys": []
+        },
+        "to_Product": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Supplement",
+          "keys": []
+        },
+        "to_SupplementText": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.SupplementText",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        },
+        "to_Travel": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Travel",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Booking": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Booking Projection View",
+      "elements": {
+        "TravelID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 8,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Travel ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Travel ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "BookingID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Booking Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Booking ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "BookingDate": {
+          "type": "cds.Date",
+          "@sap.display.format": "Date",
+          "@sap.label": "Booking Date",
+          "@sap.quickinfo": "Flight Reference Scenario: Booking Date"
+        },
+        "CustomerID": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "NonNegative",
+          "@sap.text": "CustomerName",
+          "@sap.label": "Customer ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Customer ID",
+          "@sap.value.list": "standard"
+        },
+        "CustomerName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Last Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Last Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "AirlineID": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "AirlineName",
+          "@sap.label": "Airline ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier ID",
+          "@sap.value.list": "standard"
+        },
+        "AirlineName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Airline Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "ConnectionID": {
+          "type": "cds.String",
+          "length": 4,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Flight Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Connection ID",
+          "@sap.value.list": "standard"
+        },
+        "FlightDate": {
+          "type": "cds.Date",
+          "@sap.display.format": "Date",
+          "@sap.label": "Flight Date",
+          "@sap.quickinfo": "Flight Reference Scenario: Flight Date",
+          "@sap.value.list": "standard"
+        },
+        "FlightPrice": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Flight Price",
+          "@sap.quickinfo": "Flight Reference Scenario: Flight Price"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.value.list": "standard",
+          "@sap.semantics": "currency-code"
+        },
+        "LASTCHANGEDAT": {
+          "type": "cds.Timestamp",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@odata.Precision": 7,
+          "@sap.label": "Time Stamp"
+        },
+        "to_BookSupplement": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Composition",
+          "target": "ZSB_UI_TRAVEL_U.BookingSupplement",
+          "cardinality": {
+            "max": "*"
+          },
+          "on": [
+            {
+              "ref": [
+                "to_BookSupplement",
+                "BookingID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "BookingID"
+              ]
+            },
+            "and",
+            {
+              "ref": [
+                "to_BookSupplement",
+                "TravelID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "TravelID"
+              ]
+            }
+          ]
+        },
+        "to_Carrier": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Airline",
+          "keys": []
+        },
+        "to_Connection": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.FlightConnection",
+          "keys": []
+        },
+        "to_Customer": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Passenger",
+          "keys": []
+        },
+        "to_Travel": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Travel",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Travel": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Travel Projection View",
+      "elements": {
+        "TravelID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 8,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Travel ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Travel ID",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "set_status_booked_ac": {
+          "type": "cds.Boolean",
+          "@sap.label": "Dyn. Action Control",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false"
+        },
+        "to_Booking_oc": {
+          "type": "cds.Boolean",
+          "@sap.label": "Dynamic CbA-Control",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false",
+          "@sap.sortable": "false",
+          "@sap.filterable": "false"
+        },
+        "AgencyID": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "NonNegative",
+          "@sap.text": "AgencyName",
+          "@sap.label": "Agency ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Agency ID",
+          "@sap.value.list": "standard"
+        },
+        "AgencyName": {
+          "type": "cds.String",
+          "length": 80,
+          "@sap.label": "Agency Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Agency Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "CustomerID": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "NonNegative",
+          "@sap.text": "CustomerName",
+          "@sap.label": "Customer ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Customer ID",
+          "@sap.value.list": "standard"
+        },
+        "CustomerName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Last Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Last Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "BeginDate": {
+          "type": "cds.Date",
+          "@sap.display.format": "Date",
+          "@sap.label": "Starting Date",
+          "@sap.quickinfo": "Flight Reference Scenario: Start Date"
+        },
+        "EndDate": {
+          "type": "cds.Date",
+          "@sap.display.format": "Date",
+          "@sap.label": "End Date",
+          "@sap.quickinfo": "Flight Reference Scenario: End Date"
+        },
+        "BookingFee": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Booking Fee",
+          "@sap.quickinfo": "Flight Reference Scenario: Booking Fee"
+        },
+        "TotalPrice": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Total Price",
+          "@sap.quickinfo": "Flight Reference Scenario: Total Price"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.value.list": "standard",
+          "@sap.semantics": "currency-code"
+        },
+        "Memo": {
+          "type": "cds.String",
+          "length": 1024,
+          "@sap.label": "Description",
+          "@sap.quickinfo": "Flight Reference Scenario: Description"
+        },
+        "Status": {
+          "type": "cds.String",
+          "length": 1,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Travel Status",
+          "@sap.quickinfo": "Flight Reference Scenario: Travel Status"
+        },
+        "LastChangedAt": {
+          "type": "cds.Timestamp",
+          "@odata.Type": "Edm.DateTimeOffset",
+          "@odata.Precision": 7,
+          "@sap.label": "Time Stamp",
+          "@sap.quickinfo": "UTC Time Stamp in Long Form (YYYYMMDDhhmmssmmmuuun)"
+        },
+        "to_Agency": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.TravelAgency",
+          "keys": []
+        },
+        "to_Booking": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Composition",
+          "target": "ZSB_UI_TRAVEL_U.Booking",
+          "cardinality": {
+            "max": "*"
+          },
+          "on": [
+            {
+              "ref": [
+                "to_Booking",
+                "TravelID"
+              ]
+            },
+            "=",
+            {
+              "ref": [
+                "TravelID"
+              ]
+            }
+          ]
+        },
+        "to_Currency": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Currency",
+          "keys": []
+        },
+        "to_Customer": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Passenger",
+          "keys": []
+        }
+      },
+      "actions": {
+        "set_status_booked": {
+          "kind": "action",
+          "returns": {
+            "type": "ZSB_UI_TRAVEL_U.Travel"
+          }
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.TravelAgency": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Agency View - CDS Data Model",
+      "elements": {
+        "AgencyID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "NonNegative",
+          "@sap.text": "Name",
+          "@sap.label": "Agency ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Agency ID"
+        },
+        "Name": {
+          "type": "cds.String",
+          "length": 80,
+          "@sap.label": "Agency Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Agency Name"
+        },
+        "Street": {
+          "type": "cds.String",
+          "length": 60,
+          "@sap.label": "Street",
+          "@sap.quickinfo": "Flight Reference Scenario: Street"
+        },
+        "PostalCode": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Postal Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Postal Code"
+        },
+        "City": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "City",
+          "@sap.quickinfo": "Flight Reference Scenario: City"
+        },
+        "CountryCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Country/Region Key",
+          "@sap.value.list": "standard"
+        },
+        "PhoneNumber": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Phone No.",
+          "@sap.quickinfo": "Flight Reference Scenario: Phone Number"
+        },
+        "EMailAddress": {
+          "type": "cds.String",
+          "length": 256,
+          "@sap.label": "E-Mail Address",
+          "@sap.quickinfo": "Flight Reference Scenario: Email Address"
+        },
+        "WebAddress": {
+          "type": "cds.String",
+          "length": 256,
+          "@sap.label": "Web Address",
+          "@sap.quickinfo": "Flight Reference Scenario: Web Address"
+        },
+        "to_Country": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Country",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Airport": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Airport View - CDS Data Model",
+      "@sap.value.list": "true",
+      "elements": {
+        "AirportID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "Name",
+          "@sap.label": "Airport ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Airport ID"
+        },
+        "Name": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Airport Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Airport Name"
+        },
+        "City": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "City",
+          "@sap.quickinfo": "Flight Reference Scenario: City"
+        },
+        "CountryCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Country/Region Key",
+          "@sap.value.list": "standard"
+        },
+        "to_Country": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Country",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Airline": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Carrier View - CDS Data Model",
+      "elements": {
+        "AirlineID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "Name",
+          "@sap.label": "Airline ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier ID"
+        },
+        "Name": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Airline Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier Name"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.semantics": "currency-code"
+        },
+        "to_Currency": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Currency",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.FlightConnection": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Connection View - CDS Data Model",
+      "elements": {
+        "AirlineID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "AirlineID_Text",
+          "@sap.label": "Airline ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier ID",
+          "@sap.value.list": "standard"
+        },
+        "ConnectionID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Flight Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Connection ID"
+        },
+        "AirlineID_Text": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Airline Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "DepartureAirport": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Departure Airport",
+          "@sap.quickinfo": "Flight Reference Scenario: From Airport",
+          "@sap.value.list": "standard"
+        },
+        "DestinationAirport": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Destination Airport",
+          "@sap.quickinfo": "Flight Reference Scenario: To Airport",
+          "@sap.value.list": "standard"
+        },
+        "DepartureTime": {
+          "type": "cds.Time",
+          "@sap.label": "Departure",
+          "@sap.quickinfo": "Flight Reference Scenario: Departure Time"
+        },
+        "ArrivalTime": {
+          "type": "cds.Time",
+          "@sap.label": "Arrival",
+          "@sap.quickinfo": "Flight Reference Scenario: Arrival Time"
+        },
+        "Distance": {
+          "type": "cds.Integer",
+          "@sap.unit": "DistanceUnit",
+          "@sap.label": "Flight Distance",
+          "@sap.quickinfo": "Flight Reference Scenario: Flight Distance"
+        },
+        "DistanceUnit": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.label": "Internal UoM",
+          "@sap.quickinfo": "Unit of Measurement",
+          "@sap.semantics": "unit-of-measure"
+        },
+        "to_Airline": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Airline",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Passenger": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Customer View - CDS Data Model",
+      "elements": {
+        "CustomerID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "NonNegative",
+          "@sap.text": "LastName",
+          "@sap.label": "Customer ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Customer ID"
+        },
+        "FirstName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "First Name",
+          "@sap.quickinfo": "Flight Reference Scenario: First Name"
+        },
+        "LastName": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Last Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Last Name"
+        },
+        "Title": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.label": "Title",
+          "@sap.quickinfo": "Flight Reference Scenario: Title"
+        },
+        "Street": {
+          "type": "cds.String",
+          "length": 60,
+          "@sap.label": "Street",
+          "@sap.quickinfo": "Flight Reference Scenario: Street"
+        },
+        "PostalCode": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Postal Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Postal Code"
+        },
+        "City": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "City",
+          "@sap.quickinfo": "Flight Reference Scenario: City"
+        },
+        "CountryCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Country/Region Key",
+          "@sap.value.list": "standard"
+        },
+        "PhoneNumber": {
+          "type": "cds.String",
+          "length": 30,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Phone No.",
+          "@sap.quickinfo": "Flight Reference Scenario: Phone Number"
+        },
+        "EMailAddress": {
+          "type": "cds.String",
+          "length": 256,
+          "@sap.label": "E-Mail Address",
+          "@sap.quickinfo": "Flight Reference Scenario: Email Address"
+        },
+        "to_Country": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Country",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Flight": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Flight View - CDS Data Model",
+      "@sap.value.list": "true",
+      "elements": {
+        "AirlineID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "AirlineID_Text",
+          "@sap.label": "Airline ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier ID",
+          "@sap.value.list": "standard"
+        },
+        "ConnectionID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 4,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "Flight Number",
+          "@sap.quickinfo": "Flight Reference Scenario: Connection ID",
+          "@sap.value.list": "standard"
+        },
+        "FlightDate": {
+          "key": true,
+          "type": "cds.Date",
+          "@sap.display.format": "Date",
+          "@sap.label": "Flight Date",
+          "@sap.quickinfo": "Flight Reference Scenario: Flight Date"
+        },
+        "AirlineID_Text": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Airline Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Carrier Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Flight Price",
+          "@sap.quickinfo": "Flight Reference Scenario: Flight Price"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.semantics": "currency-code"
+        },
+        "PlaneType": {
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Plane Type",
+          "@sap.quickinfo": "Flight Reference Scenario: Plane Type ID"
+        },
+        "MaximumSeats": {
+          "type": "cds.Integer",
+          "@sap.label": "Maximum Capacity",
+          "@sap.quickinfo": "Flight Reference Scenario: Plane Seats Max"
+        },
+        "OccupiedSeats": {
+          "type": "cds.Integer",
+          "@sap.label": "Occupied Seats",
+          "@sap.quickinfo": "Flight Reference Scenario: Plane Seats Occupied"
+        },
+        "to_Airline": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Airline",
+          "keys": []
+        },
+        "to_Connection": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.FlightConnection",
+          "keys": []
+        },
+        "to_Currency": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Currency",
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Supplement": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Supplement View - CDS Data Model",
+      "elements": {
+        "SupplementID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "SupplementID_Text",
+          "@sap.label": "Product ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement ID"
+        },
+        "SupplementID_Text": {
+          "type": "cds.String",
+          "length": 1024,
+          "@sap.label": "Product Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement Description",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "Price": {
+          "type": "cds.Decimal",
+          "precision": 17,
+          "scale": 3,
+          "@sap.unit": "CurrencyCode",
+          "@sap.label": "Product Price",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement Price"
+        },
+        "CurrencyCode": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Currency Code",
+          "@sap.quickinfo": "Flight Reference Scenario: Currency Code",
+          "@sap.semantics": "currency-code"
+        },
+        "to_Currency": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.Currency",
+          "keys": []
+        },
+        "to_SupplText": {
+          "@cds.ambiguous": "missing on condition?",
+          "type": "cds.Association",
+          "target": "ZSB_UI_TRAVEL_U.SupplementText",
+          "cardinality": {
+            "max": "*"
+          },
+          "keys": []
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.SupplementText": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Supplement Text View - CDS Data Model",
+      "elements": {
+        "SupplementID": {
+          "key": true,
+          "type": "cds.String",
+          "length": 10,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "Description",
+          "@sap.label": "Product ID",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement ID"
+        },
+        "LanguageCode": {
+          "key": true,
+          "type": "cds.String",
+          "length": 2,
+          "@sap.label": "Language Key"
+        },
+        "Description": {
+          "type": "cds.String",
+          "length": 1024,
+          "@sap.label": "Product Name",
+          "@sap.quickinfo": "Flight Reference Scenario: Supplement Description"
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Country": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Country",
+      "elements": {
+        "Country": {
+          "key": true,
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.text": "Country_Text",
+          "@sap.label": "Country/Region Key"
+        },
+        "Country_Text": {
+          "type": "cds.String",
+          "length": 50,
+          "@sap.label": "Country Name",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "CountryThreeLetterISOCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "ISO Code 3 Char",
+          "@sap.quickinfo": "ISO country code 3 char"
+        },
+        "CountryThreeDigitISOCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "NonNegative",
+          "@sap.label": "ISO Code Num. 3",
+          "@sap.quickinfo": "ISO Country Code Numeric 3-Characters"
+        },
+        "CountryISOCode": {
+          "type": "cds.String",
+          "length": 2,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "ISO code",
+          "@sap.quickinfo": "Country ISO code"
+        },
+        "CountryCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Country Currency",
+          "@sap.semantics": "currency-code"
+        },
+        "IndexBasedCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Index-Based Currency",
+          "@sap.quickinfo": "Currency Key of the Index-Based Currency",
+          "@sap.semantics": "currency-code"
+        },
+        "HardCurrency": {
+          "type": "cds.String",
+          "length": 5,
+          "@sap.label": "Hard Currency",
+          "@sap.quickinfo": "Currency Key of the Hard Currency",
+          "@sap.semantics": "currency-code"
+        },
+        "TaxCalculationProcedure": {
+          "type": "cds.String",
+          "length": 6,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Procedure",
+          "@sap.quickinfo": "Procedure (Pricing, Output Control, Acct. Det., Costing,...)"
+        },
+        "CountryAlternativeCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Alternative Key",
+          "@sap.quickinfo": "Alternative Country Key"
+        }
+      }
+    },
+    "ZSB_UI_TRAVEL_U.Currency": {
+      "kind": "entity",
+      "@cds.persistence.skip": true,
+      "@sap.creatable": "false",
+      "@sap.updatable": "false",
+      "@sap.deletable": "false",
+      "@sap.searchable": "true",
+      "@sap.content.version": "1",
+      "@sap.label": "Currency",
+      "elements": {
+        "Currency": {
+          "key": true,
+          "type": "cds.String",
+          "length": 5,
+          "@sap.text": "Currency_Text",
+          "@sap.label": "Currency",
+          "@sap.quickinfo": "Currency Key",
+          "@sap.semantics": "currency-code"
+        },
+        "Currency_Text": {
+          "type": "cds.String",
+          "length": 40,
+          "@sap.label": "Description",
+          "@sap.creatable": "false",
+          "@sap.updatable": "false"
+        },
+        "Decimals": {
+          "type": "cds.Integer",
+          "@odata.Type": "Edm.Byte",
+          "@sap.label": "Decimal Places",
+          "@sap.quickinfo": "Number of decimal places"
+        },
+        "CurrencyISOCode": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "ISO Code",
+          "@sap.quickinfo": "ISO Currency Code"
+        },
+        "AlternativeCurrencyKey": {
+          "type": "cds.String",
+          "length": 3,
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Alternative Key"
+        },
+        "IsPrimaryCurrencyForISOCrcy": {
+          "type": "cds.Boolean",
+          "@sap.display.format": "UpperCase",
+          "@sap.label": "Primary",
+          "@sap.quickinfo": "Primary SAP Currency Code for ISO Code"
+        }
+      }
+    }
+  }
+}

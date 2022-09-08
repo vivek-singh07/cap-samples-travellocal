@@ -1,0 +1,73 @@
+{
+  "name": "travellocal",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": ">=5",
+    "@sap-cloud-sdk/http-client": "^2.5.0",
+    "@sap/xsenv": "^3.3.2",
+    "@sap/xssec": "^3.2.13",
+    "express": "^4"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.4"
+  },
+  "scripts": {
+    "setup": "npm install && npm run build && npm run deploy:local",
+    "start": "npm run start:cds",
+    "start:cds": "cds run"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "query": {
+      "limit": {
+        "default": 20
+      }
+    },
+    "features": {
+      "fetch_csrf": true
+    },
+    "requires": {
+      "uaa": {
+        "kind": "xsuaa",
+        "credentials": {}
+      },
+      "ZSB_UI_TRAVEL_U": {
+        "kind": "odata-v2",
+        "model": "srv/external/ZSB_UI_TRAVEL_U",
+        "credentials": {
+          "path": "/sap/opu/odata/sap/ZSB_UI_TRAVEL_U",
+          "destination": "s4h_http",
+          "requestTimeout": 1000000
+        }
+      }
+    }
+  }
+}

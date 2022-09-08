@@ -1,0 +1,13 @@
+/* rename this file as default-env.json, add on prem user id and password */
+{
+	"VCAP_SERVICES": {
+	},
+	"destinations": [
+	  {
+		"name": "s4h_http",
+		"url": "http://usawcon00014.us.deloitte.com:8001", 
+		"username": "<user_id>",
+		"password": "<password>"
+	  }
+	]
+}
