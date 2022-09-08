@@ -5,7 +5,7 @@
 	"destinations": [
 	  {
 		"name": "s4h_http",
-		"url": "http://usawcon00014.us.deloitte.com:8001", 
+		"url": "http://<host>:<port>", 
 		"username": "<user_id>",
 		"password": "<password>"
 	  }
